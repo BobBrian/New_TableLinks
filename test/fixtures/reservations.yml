@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reservation_time: 2024-02-25 17:26:31
+  inactive: false
+
+two:
+  reservation_time: 2024-02-25 17:26:31
+  inactive: false

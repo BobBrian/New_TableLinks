@@ -9,13 +9,36 @@ class ApplicationController < ActionController::Base
   end
 
   # Business Logic for Routes
+  # def after_sign_in_path_for(resource)
+  #   # Customize the redirect path after sign in
+  #   if resource.is_a?(User)
+  #     # Redirect to the customer index page
+  #     admin_home_path
+  #   else
+  #     # Default redirect path for other types of resources (if applicable)
+  #     root_path
+  #   end
+  # end
+
+  #Improved Business Logic for Routing based on Role
   def after_sign_in_path_for(resource)
     # Customize the redirect path after sign in
     if resource.is_a?(User)
-      # Redirect to the customer index page
-      admin_home_path
+      if resource.role == 'Owner'
+        # Redirect to the owner index page
+        owner_home_path
+      elsif resource.role == 'Customer'
+        # Redirect to the customer index page
+        customer_home_path
+      elsif resource.role == 'Admin'
+        # Redirect to the admin index page
+        admin_home_path
+      else
+        # Default redirect path for unknown roles
+        root_path
+      end
     else
-      # Default redirect path for other types of resources (if applicable)
+      # Default redirect path for non-users
       root_path
     end
   end
