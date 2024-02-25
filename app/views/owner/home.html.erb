@@ -1,2 +1,12 @@
 <h1>Owner#home</h1>
 <p>Welcome to the Owner Page</p>
+
+<% if current_user %>
+  <p> Hello Welcome to the website for TableLinks build for Restaurant Owners/p>
+  <p> Hello <%= current_user.email %></p>
+  <p>If you can see this message and this post then that must mean you are a <%= current_user.role %></p>
+  <p> And You have successfully logged in</p>
+  
+<%else%>
+ <p>Only an Owner can see beyond this page </p>
+<% end %>
