@@ -1,0 +1,2 @@
+module TablelinksHelper
+end
