@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+  <!-- Restaurant fields -->
   <div>
     <%= form.label :restaurant_name, style: "display: block" %>
     <%= form.text_field :restaurant_name %>
@@ -29,6 +30,20 @@
   <div>
     <%= form.label :contact_number, style: "display: block" %>
     <%= form.text_field :contact_number %>
+  </div>
+
+  <!-- Your existing restaurant fields here -->
+  <div class="field">
+    <%= form.fields_for :tables do |table_form| %>
+      <p>
+        <%= table_form.label :name, 'Table Name' %><br>
+        <%= table_form.text_field :name %>
+      </p>
+      <p>
+        <%= table_form.label :number_of_seats, 'Number of Seats' %><br>
+        <%= table_form.number_field :number_of_seats %>
+      </p>
+    <% end %>
   </div>
 
   <div>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :reservations
-  resources :tables
-  resources :restaurants
+  # resources :tables
+  resources :restaurants do
+    resources :tables
+  end
   # get 'customer/home'
   # get 'owner/home'
   # get 'admin/home'

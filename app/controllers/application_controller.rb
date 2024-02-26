@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
+  before_action :check_role_for_restaurant_routes
 
   protected
 
@@ -40,6 +42,15 @@ class ApplicationController < ActionController::Base
     else
       # Default redirect path for non-users
       root_path
+    end
+  end
+
+  #Code to Block off Users with the Customer Role form accessing resturant routes
+  private
+
+  def check_role_for_restaurant_routes
+    if params[:controller].start_with?('restaurants') && !current_user.owner?
+      render file: "#{Rails.root}/public/404", layout: false, status: :not_found
     end
   end
 

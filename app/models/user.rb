@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: [:Customer, :Owner, :Admin]
+
+  has_many :restaurants, dependent: :destroy
+  has_many :reservations
   
   # after_initialize :set_default_role, :if => :new_record?
   # def set_default_role

@@ -12,6 +12,12 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
+    <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_include_tag 'flatpickr' %>
+    <%= stylesheet_link_tag 'flatpickr' %>
+
   </head>
   <body>
     <%= render 'layouts/header'%>
