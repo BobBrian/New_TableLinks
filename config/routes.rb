@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :reservations
-  
+
+  # namespace :customer do
+  #   resources :reservations, only: [:index]
+  # end
+
   # resources :tables
   resources :restaurants do
     resources :tables
@@ -12,6 +16,7 @@ Rails.application.routes.draw do
   root 'tablelinks#home'
   #Customer Routes
   get 'customer/home', to: 'customer#home', as: 'customer_home'
+  get 'customer/viewreservations', to: 'customer#viewreservations', as: 'customer_viewreservations'
 
   #Owner Routes
   get 'owner/home', to: 'owner#home', as: 'owner_home'
