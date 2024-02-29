@@ -1,0 +1,10 @@
+<!-- views/restaurants/index.html.erb -->
+<h1>Your Restaurants</h1>
+<% @owner_restaurants.each do |restaurant| %>
+  <div>
+    <h2><%= restaurant.restaurant_name %></h2>
+    <p><strong>Address:</strong> <%= restaurant.restaurant_address %></p>
+    <p><strong>Email:</strong> <%= restaurant.email %></p>
+    <p><strong>Contact Number:</strong> <%= restaurant.contact_number %></p>
+  </div>
+<% end %>

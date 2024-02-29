@@ -21,6 +21,11 @@ class RestaurantsController < ApplicationController
   def edit
   end
 
+  # GET All Restaurant a Particular User Owns
+  def index
+    @owner_restaurants = current_user.restaurants
+  end
+
   # POST /restaurants or /restaurants.json
   def create
     @restaurant = Restaurant.new(restaurant_params)

@@ -1,0 +1,24 @@
+<!-- views/customer/reservations.html.erb -->
+<h1>Your Reservations</h1>
+<% if @customer_reservations.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Restaurant Name</th>
+        <th>Date and Time</th>
+        <!-- Add more table headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <% @customer_reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.restaurant.restaurant_name %></td>
+          <td><%= reservation.reservation_date_time.strftime('%B %d, %Y %I:%M %p') %></td>
+          <!-- Add more table cells for other reservation details -->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No reservations found.</p>
+<% end %>

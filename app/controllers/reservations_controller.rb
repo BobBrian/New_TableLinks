@@ -19,6 +19,16 @@ class ReservationsController < ApplicationController
   def edit
   end
 
+  #GET All Reservations Made to a Particular Users Restaurant
+  def index
+    @owner_reservations = current_user.restaurants.map(&:reservations).flatten
+  end
+
+  #GET All Reservations Made by a Particular Customer
+  def index
+    @customer_reservations = current_user.reservations.order(reservation_date_time: :asc)
+  end
+
   # POST /reservations or /reservations.json
   def create
     @reservation = Reservation.new(reservation_params)
@@ -56,6 +66,8 @@ class ReservationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

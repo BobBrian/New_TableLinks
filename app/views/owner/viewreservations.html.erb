@@ -1,0 +1,9 @@
+<!-- views/restaurants/reservations.html.erb -->
+<h1>Reservations for Your Restaurants</h1>
+<% @owner_reservations.each do |reservation| %>
+  <div>
+    <h2><%= reservation.restaurant.restaurant_name %></h2>
+    <p><strong>Reservation Date and Time:</strong> <%= reservation.reservation_date_time %></p>
+    <!-- Add more reservation details as needed -->
+  </div>
+<% end %>
