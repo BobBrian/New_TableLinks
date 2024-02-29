@@ -11,6 +11,16 @@
     </div>
   <% end %>
 
+<!-- Reservation Form Fields-->
+  <div class="field">
+    <%= form.label :restaurant_id, 'Restaurant' %>
+    <%= form.collection_select :restaurant_id, Restaurant.all, :id, :name, prompt: 'Select Restaurant' %>
+  </div>
+
+  <div class="field" id="table-field" style="display: none;">
+    <%= form.label :table_id, 'Table' %>
+    <%= form.collection_select :table_id, [], :id, :name, prompt: 'Select Table' %>
+  </div>
   <div class="field">
     <%= form.label :reservation_date %>
     <%= form.text_field :reservation_date, class: 'flatpickr', data: { enable_time: false } %>
@@ -22,7 +32,7 @@
     <%= form.datetime_field :reservation_time %>
   </div>
 
-  <!-- This should be Inactive -->
+  <!-- This should be Inactive  -->
   <div>
     <%= form.label :inactive, style: "display: block" %>
     <%= form.check_box :inactive %>
@@ -40,3 +50,33 @@
   </script>
 
 <% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const restaurantSelect = document.querySelector('#reservation_restaurant_id');
+    const tableField = document.querySelector('#table-field');
+
+    restaurantSelect.addEventListener('change', () => {
+      const restaurantId = restaurantSelect.value;
+
+      // Fetch tables associated with the selected restaurant
+      fetch(`/restaurants/${restaurantId}/tables`)
+        .then(response => response.json())
+        .then(tables => {
+          const tableSelect = document.querySelector('#reservation_table_id');
+          tableSelect.innerHTML = ''; // Clear existing options
+
+          // Populate table dropdown
+          tables.forEach(table => {
+            const option = document.createElement('option');
+            option.value = table.id;
+            option.textContent = table.name;
+            tableSelect.appendChild(option);
+          });
+
+          // Show table dropdown
+          tableField.style.display = 'block';
+        });
+    });
+  });
+</script>

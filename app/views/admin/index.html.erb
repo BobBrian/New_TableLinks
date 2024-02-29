@@ -1,0 +1,24 @@
+<h1>Admin Dashboard</h1>
+
+<h2>All Users</h2>
+<ul>
+  <% @users.each do |user| %>
+    <% unless user == current_user %>
+      <li><%= user.email %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h2>All Restaurants</h2>
+<ul>
+  <% @restaurants.each do |restaurant| %>
+    <li><%= restaurant.name %></li>
+  <% end %>
+</ul>
+
+<h2>All Reservations</h2>
+<ul>
+  <% @reservations.each do |reservation| %>
+    <li><%= reservation.id %></li>
+  <% end %>
+</ul>

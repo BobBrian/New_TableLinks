@@ -44,6 +44,20 @@ class ApplicationController < ActionController::Base
       root_path
     end
   end
+  #Code to Handle Cascading Drop-Down Boxes of the Reservation Form
+  def create
+    @reservation = Reservation.new(reservation_params)
+
+    if @reservation.save
+      # Update table availability
+      table = Table.find(@reservation.table_id)
+      table.update(is_available: false)
+
+      redirect_to @reservation, notice: 'Reservation was successfully created.'
+    else
+      render :new
+    end
+  end
 
   #Code to Block off Users with the Customer Role form accessing resturant routes
   private
@@ -52,6 +66,10 @@ class ApplicationController < ActionController::Base
     if params[:controller].start_with?('restaurants') && !current_user.owner?
       render file: "#{Rails.root}/public/404", layout: false, status: :not_found
     end
+  end
+
+  def reservation_params
+    params.require(:reservation).permit(:restaurant_id, :table_id, :reservation_date, :reservation_time)
   end
 
 end
